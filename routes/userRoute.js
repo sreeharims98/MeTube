@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get("/", isAdminMiddleware, getAllUsers);
 router.post("/", userValidator(), userValidate, postUser);
-router.get("/login", loginUser);
+router.post("/login", loginUser);
 router.get("/get", authMiddleware, getUserByToken);
 router.put("/:id", authMiddleware, putUser);
 router.delete("/:id", authMiddleware, deleteUser);
