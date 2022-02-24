@@ -1,23 +1,23 @@
 import path from "path";
 import multer from "multer";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import fs from "fs";
+
+var dir = path.join(__dirname) + "/uploads";
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads/");
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    cb(null, path.join(__dirname, "/uploads/"));
   },
   filename: (req, file, cb) => {
     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
   },
 });
-
-// let storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, zpath.join(__dirname, "/uploads/"));
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date().toISOString().replace(/:/g, "-") + file.originalname);
-//   },
-// });
 
 export let uploadFile = multer({
   storage: storage,
