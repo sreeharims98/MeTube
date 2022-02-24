@@ -5,7 +5,7 @@ export const getAllVideos = async (req, res) => {
     const allVideos = await videoModel.find();
     res.json(allVideos);
   } catch (error) {
-    res.json({ message: "Videos not found !" });
+    res.status(400).json({ message: "Videos not found !" });
   }
 };
 
@@ -14,7 +14,7 @@ export const getVideoById = async (req, res) => {
     const video = await videoModel.findById(req.params.id);
     res.json(video);
   } catch (error) {
-    res.json({ message: "Video not found !" });
+    res.status(400).json({ message: "Video not found !" });
   }
 };
 
@@ -27,7 +27,7 @@ export const postVideo = async (req, res) => {
     });
     res.json({ message: "Video created" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -41,7 +41,7 @@ export const putVideo = async (req, res) => {
     await video.save();
     res.json({ message: "Video updated" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -50,7 +50,7 @@ export const delVideo = async (req, res) => {
     await videoModel.deleteOne({ _id: req.params.id });
     res.json({ message: "Video deleted" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -75,7 +75,7 @@ export const likeVideo = async (req, res) => {
       res.json({ message: "Video liked" });
     }
   } catch (error) {
-    res.json({ message: "Video not found !" });
+    res.status(400).json({ message: "Video not found !" });
   }
 };
 
@@ -98,7 +98,7 @@ export const dislikeVideo = async (req, res) => {
       res.json({ message: "Video disliked" });
     }
   } catch (error) {
-    res.json({ message: "Video not found !" });
+    res.status(400).json({ message: "Video not found !" });
   }
 };
 
@@ -119,6 +119,6 @@ export const checkUserReactionToVideo = async (req, res) => {
       res.json({ reaction: "no_reaction" });
     }
   } catch (error) {
-    res.json({ message: "Video not found !" });
+    res.status(400).json({ message: "Video not found !" });
   }
 };
