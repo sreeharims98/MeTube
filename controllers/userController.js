@@ -7,7 +7,7 @@ export const getAllUsers = async (req, res) => {
     const allProjects = await userModel.find();
     res.json(allProjects);
   } catch (error) {
-    res.json({ message: "Users not found !" });
+    res.status(400).json({ message: "Users not found !" });
   }
 };
 
@@ -24,7 +24,7 @@ export const getUserByToken = async (req, res) => {
 
     res.json(userNew);
   } catch (error) {
-    res.json({ message: "User not found !" });
+    res.status(400).json({ message: "User not found !" });
   }
 };
 
@@ -53,7 +53,7 @@ export const loginUser = async (req, res) => {
       throw new Error("Invalid email or password");
     }
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -97,7 +97,7 @@ export const postUser = async (req, res) => {
       throw new Error("Invalid user data");
     }
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -108,7 +108,7 @@ export const putUser = async (req, res) => {
     await user.save();
     res.json({ message: "User updated" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -117,6 +117,6 @@ export const deleteUser = async (req, res) => {
     await userModel.deleteOne({ _id: req.params.id });
     res.json({ message: "User deleted" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
